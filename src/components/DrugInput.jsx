@@ -51,7 +51,7 @@ function DrugInput({ value, onChange }) {
                     <Pill className="w-4 h-4" style={{ color: 'var(--color-primary-600)' }} />
                 </div>
                 <h3 className="text-sm font-semibold m-0" style={{ color: 'var(--color-slate-800)' }}>
-                    Drug Selection
+                    Drug Selection (comma-separated)
                 </h3>
             </div>
 
@@ -75,7 +75,7 @@ function DrugInput({ value, onChange }) {
                         onChange={handleInputChange}
                         onFocus={() => query.length > 0 && setShowSuggestions(true)}
                         onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                        placeholder="Search drug name (e.g., Warfarin)"
+                        placeholder="Enter drugs (e.g., Codeine, Warfarin)"
                         className="flex-1 text-sm outline-none"
                         style={{
                             border: 'none',

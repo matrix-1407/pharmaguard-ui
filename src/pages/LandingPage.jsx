@@ -35,7 +35,7 @@ function LandingPage() {
         <div>
             {/* ─── Hero Section ─── */}
             <section className="hero-gradient text-white" style={{ position: 'relative' }}>
-                <div className="container-app text-center" style={{ position: 'relative', zIndex: 1, paddingTop: 'var(--space-section)', paddingBottom: 'var(--space-section)' }}>
+                <div className="container-app text-center" style={{ position: 'relative', zIndex: 2, paddingTop: 'var(--space-section)', paddingBottom: 'var(--space-section)' }}>
                     <div
                         className="inline-flex items-center rounded-full text-sm font-medium animate-fade-in"
                         style={{

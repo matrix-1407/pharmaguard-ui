@@ -122,14 +122,6 @@ function AnalysisPage() {
                             <button type="button" onClick={() => setShowJson(!showJson)} className="btn-secondary">
                                 <Code className="w-4 h-4" /> {showJson ? 'Hide JSON' : 'Show JSON'}
                             </button>
-                            <Link
-                                to={`/report/${result.analysisId}`}
-                                state={{ result }}
-                                className="btn-primary"
-                                style={{ fontSize: '0.875rem', padding: '0.625rem 1.25rem' }}
-                            >
-                                <FileBarChart className="w-4 h-4" /> Full Report
-                            </Link>
                         </div>
 
                         <RiskSummaryCard result={result} />

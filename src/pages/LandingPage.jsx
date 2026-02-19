@@ -3,16 +3,16 @@ import {
     ArrowRight, Upload, FlaskConical, FileBarChart, Shield, Dna,
     Zap, Brain, Lock, ChevronRight, Sparkles, Activity
 } from 'lucide-react';
+import Aurora from '../components/Aurora/Aurora';
+import SpotlightCard from '../components/SpotlightCard/SpotlightCard';
 
 const SUPPORTED_DRUGS = [
+    { name: 'Codeine', category: 'Analgesic' },
     { name: 'Warfarin', category: 'Anticoagulant' },
     { name: 'Clopidogrel', category: 'Antiplatelet' },
-    { name: 'Codeine', category: 'Analgesic' },
-    { name: 'Tamoxifen', category: 'Antineoplastic' },
     { name: 'Simvastatin', category: 'Statin' },
-    { name: 'Abacavir', category: 'Antiretroviral' },
+    { name: 'Azathioprine', category: 'Immunosuppressant' },
     { name: 'Fluorouracil', category: 'Antineoplastic' },
-    { name: 'Mercaptopurine', category: 'Immunosuppressant' },
 ];
 
 const FEATURES = [
@@ -34,7 +34,16 @@ function LandingPage() {
     return (
         <div>
             {/* ─── Hero Section ─── */}
-            <section className="hero-gradient text-white" style={{ position: 'relative' }}>
+            <section className="hero-gradient text-white" style={{ position: 'relative', overflow: 'hidden' }}>
+                {/* Aurora WebGL Background */}
+                <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.6 }}>
+                    <Aurora
+                        colorStops={['#3b52cc', '#6d8cff', '#3b52cc']}
+                        amplitude={1.2}
+                        blend={0.7}
+                        speed={2.0}
+                    />
+                </div>
                 <div className="container-app text-center" style={{ position: 'relative', zIndex: 2, paddingTop: 'var(--space-section)', paddingBottom: 'var(--space-section)' }}>
                     <div
                         className="inline-flex items-center rounded-full text-sm font-medium animate-fade-in"
@@ -124,13 +133,20 @@ function LandingPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: 'var(--card-gap)' }}>
                     {FEATURES.map((f, i) => (
-                        <div key={f.title} className="card-elevated animate-fade-in" style={{ padding: 'var(--card-padding)', animationDelay: `${i * 0.08}s` }}>
-                            <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: f.bg, marginBottom: 'var(--space-lg)' }}>
-                                <f.icon className="w-5 h-5" style={{ color: f.color }} />
+                        <SpotlightCard
+                            key={f.title}
+                            spotlightColor="rgba(99, 130, 255, 0.15)"
+                            className="card-elevated animate-fade-in"
+                            style={{ padding: 'var(--card-padding)', animationDelay: `${i * 0.08}s`, borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-border)' }}
+                        >
+                            <div style={{ position: 'relative', zIndex: 2 }}>
+                                <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: f.bg, marginBottom: 'var(--space-lg)' }}>
+                                    <f.icon className="w-5 h-5" style={{ color: f.color }} />
+                                </div>
+                                <h3 className="text-base font-semibold m-0" style={{ color: 'var(--color-text)', marginBottom: 'var(--space-sm)' }}>{f.title}</h3>
+                                <p className="text-sm leading-relaxed m-0" style={{ color: 'var(--color-text-secondary)' }}>{f.description}</p>
                             </div>
-                            <h3 className="text-base font-semibold m-0" style={{ color: 'var(--color-text)', marginBottom: 'var(--space-sm)' }}>{f.title}</h3>
-                            <p className="text-sm leading-relaxed m-0" style={{ color: 'var(--color-text-secondary)' }}>{f.description}</p>
-                        </div>
+                        </SpotlightCard>
                     ))}
                 </div>
             </section>
@@ -144,8 +160,9 @@ function LandingPage() {
                     </div>
                     <div className="flex flex-wrap justify-center max-w-3xl mx-auto" style={{ gap: 'var(--space-md)' }}>
                         {SUPPORTED_DRUGS.map((drug) => (
-                            <div
+                            <SpotlightCard
                                 key={drug.name}
+                                spotlightColor="rgba(79, 110, 247, 0.2)"
                                 className="inline-flex items-center rounded-full transition-all cursor-default"
                                 style={{
                                     padding: '0.625rem 1rem',
@@ -153,14 +170,13 @@ function LandingPage() {
                                     background: 'var(--color-surface)',
                                     border: '1px solid var(--color-border)',
                                     boxShadow: 'var(--shadow-sm)',
+                                    borderRadius: '9999px',
                                 }}
-                                onMouseEnter={(e) => { e.currentTarget.style.boxShadow = 'var(--shadow-md)'; e.currentTarget.style.borderColor = 'var(--color-primary-200)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.transform = 'translateY(0)'; }}
                             >
-                                <FlaskConical className="w-3.5 h-3.5" style={{ color: 'var(--color-primary-500)' }} />
-                                <span className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>{drug.name}</span>
-                                <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>· {drug.category}</span>
-                            </div>
+                                <FlaskConical className="w-3.5 h-3.5" style={{ color: 'var(--color-primary-500)', position: 'relative', zIndex: 2 }} />
+                                <span className="text-sm font-medium" style={{ color: 'var(--color-text)', position: 'relative', zIndex: 2 }}>{drug.name}</span>
+                                <span className="text-xs" style={{ color: 'var(--color-text-muted)', position: 'relative', zIndex: 2 }}>· {drug.category}</span>
+                            </SpotlightCard>
                         ))}
                     </div>
                 </div>
@@ -200,17 +216,17 @@ function LandingPage() {
 
             {/* ─── CTA Section ─── */}
             <section className="container-app" style={{ paddingBottom: 'var(--section-gap)' }}>
-                <div
+                <SpotlightCard
+                    spotlightColor="rgba(129, 140, 248, 0.2)"
                     className="rounded-2xl text-center"
                     style={{
                         padding: 'var(--space-4xl)',
                         background: 'linear-gradient(135deg, var(--color-primary-800), var(--color-primary-900))',
                         boxShadow: '0 20px 60px rgba(15, 23, 64, 0.3)',
-                        position: 'relative',
-                        overflow: 'hidden',
+                        borderRadius: 'var(--radius-2xl)',
                     }}
                 >
-                    <div style={{ position: 'relative', zIndex: 1 }}>
+                    <div style={{ position: 'relative', zIndex: 2 }}>
                         <Dna className="w-12 h-12 mx-auto" style={{ color: 'var(--color-primary-300)', opacity: 0.6, marginBottom: 'var(--space-xl)' }} strokeWidth={1} />
                         <h2 className="text-2xl md:text-3xl font-bold" style={{ color: 'white', fontFamily: 'var(--font-heading)', marginBottom: 'var(--space-lg)' }}>Ready to analyze?</h2>
                         <p className="text-base max-w-lg mx-auto" style={{ color: 'rgba(191, 207, 255, 0.8)', marginBottom: 'var(--space-3xl)' }}>
@@ -226,7 +242,7 @@ function LandingPage() {
                             Start Analysis <ArrowRight className="w-5 h-5" />
                         </Link>
                     </div>
-                </div>
+                </SpotlightCard>
             </section>
 
             {/* ─── Disclaimer ─── */}

@@ -6,60 +6,66 @@ function Footer() {
     const { theme } = useTheme();
     const isDark = theme === 'dark';
 
+    /*
+     * Dark-mode page bg is #0b1120.
+     * Footer uses a LIGHTER navy (#1e293b) so it's visually distinct.
+     */
+    const footerBg = isDark ? '#1e293b' : '#0f172a';
+
     return (
         <footer
             className="no-print"
             style={{
-                background: isDark
-                    ? 'linear-gradient(180deg, rgba(6, 10, 23, 0) 0%, #0a0f1e 15%)'
-                    : 'linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.6) 20%, var(--color-slate-900) 100%)',
+                background: footerBg,
             }}
         >
-            {/* Accent glow line at top */}
+            {/* Accent top border */}
             <div style={{
-                height: '1px',
-                background: isDark
-                    ? 'linear-gradient(90deg, transparent, var(--color-primary-500), transparent)'
-                    : 'linear-gradient(90deg, transparent, rgba(99,130,255,0.3), transparent)',
+                height: '2px',
+                background: 'linear-gradient(90deg, transparent, #6366f1, #818cf8, #6366f1, transparent)',
             }} />
 
-            <div className="container-app" style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-2xl)' }}>
+            <div style={{
+                maxWidth: '1200px',
+                margin: '0 auto',
+                padding: '2.5rem 1.5rem 2rem',
+            }}>
                 {/* Top — Brand + Nav */}
-                <div
-                    className="flex flex-col md:flex-row items-start md:items-center justify-between"
-                    style={{
-                        gap: 'var(--space-2xl)',
-                        paddingBottom: 'var(--space-2xl)',
-                        borderBottom: isDark
-                            ? '1px solid rgba(99, 130, 255, 0.12)'
-                            : '1px solid rgba(148,163,184,0.1)',
-                    }}
-                >
+                <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1.5rem',
+                    paddingBottom: '1.5rem',
+                    borderBottom: '1px solid rgba(148, 163, 184, 0.2)',
+                }}>
                     {/* Brand */}
-                    <div className="flex items-center" style={{ gap: 'var(--space-md)' }}>
-                        <div
-                            className="w-9 h-9 rounded-xl flex items-center justify-center"
-                            style={{
-                                background: 'linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700))',
-                                boxShadow: isDark
-                                    ? '0 0 24px rgba(79,110,247,0.4)'
-                                    : '0 0 20px rgba(79,110,247,0.25)',
-                            }}
-                        >
-                            <Shield className="w-4 h-4 text-white" strokeWidth={2.2} />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <div style={{
+                            width: '36px',
+                            height: '36px',
+                            borderRadius: '10px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: 'linear-gradient(135deg, #4f6ef7, #3b52cc)',
+                            boxShadow: '0 0 20px rgba(79,110,247,0.35)',
+                        }}>
+                            <Shield style={{ width: '16px', height: '16px', color: 'white' }} strokeWidth={2.2} />
                         </div>
                         <span style={{
-                            fontFamily: 'var(--font-heading)',
                             fontWeight: 700,
                             fontSize: '1.125rem',
-                            color: isDark ? '#e2e8f0' : 'white',
+                            color: '#f1f5f9',
+                            letterSpacing: '-0.01em',
                         }}>
-                            Pharma<span style={{ color: 'var(--color-primary-400)' }}>Guard</span>
+                            Pharma<span style={{ color: '#818cf8' }}>Guard</span>
                         </span>
                     </div>
 
                     {/* Nav links */}
-                    <nav className="flex items-center flex-wrap" style={{ gap: 'var(--space-xl)' }}>
+                    <nav style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
                         {[
                             { to: '/analyze', label: 'Analysis' },
                             { to: '/docs', label: 'Documentation' },
@@ -68,10 +74,15 @@ function Footer() {
                             <Link
                                 key={to}
                                 to={to}
-                                className="text-sm no-underline transition-colors font-medium"
-                                style={{ color: isDark ? '#94a3b8' : 'rgba(148,163,184,0.7)' }}
-                                onMouseEnter={(e) => (e.currentTarget.style.color = isDark ? '#e2e8f0' : 'white')}
-                                onMouseLeave={(e) => (e.currentTarget.style.color = isDark ? '#94a3b8' : 'rgba(148,163,184,0.7)')}
+                                style={{
+                                    color: '#cbd5e1',
+                                    fontSize: '0.875rem',
+                                    fontWeight: 500,
+                                    textDecoration: 'none',
+                                    transition: 'color 0.2s',
+                                }}
+                                onMouseEnter={(e) => (e.currentTarget.style.color = '#f8fafc')}
+                                onMouseLeave={(e) => (e.currentTarget.style.color = '#cbd5e1')}
                             >
                                 {label}
                             </Link>
@@ -80,22 +91,34 @@ function Footer() {
                 </div>
 
                 {/* Bottom — tagline */}
-                <div
-                    className="flex flex-col sm:flex-row items-center justify-between"
-                    style={{ paddingTop: 'var(--space-lg)', gap: 'var(--space-md)' }}
-                >
-                    <p className="text-xs flex items-center m-0" style={{
-                        gap: 'var(--space-xs)',
-                        color: isDark ? '#64748b' : 'rgba(148,163,184,0.5)',
+                <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingTop: '1rem',
+                    gap: '0.75rem',
+                }}>
+                    <p style={{
+                        margin: 0,
+                        fontSize: '0.75rem',
+                        color: '#94a3b8',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.375rem',
                     }}>
-                        <Sparkles className="w-3 h-3" style={{ color: 'var(--color-primary-400)' }} />
+                        <Sparkles style={{ width: '12px', height: '12px', color: '#818cf8' }} />
                         AI-powered precision pharmacogenomics
                     </p>
-                    <p className="text-xs flex items-center m-0" style={{
-                        gap: 'var(--space-xs)',
-                        color: isDark ? '#64748b' : 'rgba(148,163,184,0.5)',
+                    <p style={{
+                        margin: 0,
+                        fontSize: '0.75rem',
+                        color: '#94a3b8',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.375rem',
                     }}>
-                        Built with <Heart className="w-3 h-3" style={{ color: '#f87171' }} /> for precision medicine
+                        Built with <Heart style={{ width: '12px', height: '12px', color: '#f87171' }} /> for precision medicine
                     </p>
                 </div>
             </div>

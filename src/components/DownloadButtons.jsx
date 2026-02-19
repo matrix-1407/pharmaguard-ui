@@ -1,5 +1,4 @@
-import { Download, FileText, ExternalLink } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Download } from 'lucide-react';
 
 function DownloadButtons({ data, analysisId }) {
     function downloadJson() {
@@ -22,20 +21,9 @@ function DownloadButtons({ data, analysisId }) {
                 <Download className="w-4 h-4" />
                 Download JSON
             </button>
-            {analysisId && (
-                <Link
-                    to={`/report/${analysisId}`}
-                    state={{ result: data }}
-                    className="btn-primary"
-                    style={{ fontSize: '0.875rem', padding: '0.625rem 1.25rem' }}
-                >
-                    <FileText className="w-4 h-4" />
-                    View Full Report
-                    <ExternalLink className="w-3.5 h-3.5" />
-                </Link>
-            )}
         </div>
     );
 }
 
 export default DownloadButtons;
+

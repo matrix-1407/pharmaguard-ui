@@ -38,7 +38,7 @@ function AnalysisPage() {
             const message =
                 err.response?.data?.message ||
                 err.response?.data?.error ||
-                'Analysis failed. Please check your inputs and try again.';
+                'The server is restarting. Please try again in 1–2 minutes.';
             setError(message);
         } finally {
             setLoading(false);
